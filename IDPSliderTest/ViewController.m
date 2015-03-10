@@ -8,20 +8,33 @@
 
 #import "ViewController.h"
 
+#import "IDPView.h"
+
 @interface ViewController ()
+@property (nonatomic, readonly) IDPView     *mainView;
 
 @end
 
 @implementation ViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+@dynamic mainView;
+
+#pragma mark -
+#pragma mark Accessors
+
+- (IDPView *)mainView {
+    if ([self isViewLoaded] && [self.view isKindOfClass:[IDPView class]]) {
+        return (IDPView *)self.view;
+    }
+    
+    return nil;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+#pragma mark -
+#pragma mark Interface Handling
+
+- (IBAction)onRangeSliderValueChange:(id)sender {
+    [self.mainView updateLabelsWithSlider];
 }
 
 @end
